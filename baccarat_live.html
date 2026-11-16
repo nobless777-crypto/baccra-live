@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="바카라 마틴">
+<link rel="manifest" href="manifest.webmanifest">
+<title>BACCARAT MARTIN</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#151f30;--panel2:#1c293c;--muted:#91a0b5;--gold:#e4bd72;--blue:#3978c6;--red:#a94750;--green:#21865e;--line:#2b3a50}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b2a40 0%,var(--bg) 55%);color:#f5f7fb;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;min-height:100vh}
+.app{width:min(100%,520px);margin:0 auto;padding:10px 14px 24px}
+.video-panel{overflow:hidden;margin:0 0 10px;border:1px solid var(--line);border-radius:15px;background:#0d1725;box-shadow:0 8px 22px #0003}
+.video-head{height:30px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:1px;color:#dce6f4}
+.video-head a{color:#91a0b5;text-decoration:none;font-size:10px;letter-spacing:0;font-weight:650}
+.video-frame{position:relative;width:100%;aspect-ratio:16/9;background:#05080e}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+header{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 14px}
+h1{font-size:19px;letter-spacing:1.2px;margin:0;font-weight:850}.sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;margin-top:3px}
+.pill{font-size:10px;border:1px solid #2e755c;color:#7fe0b3;padding:5px 9px;border-radius:30px}
+.panel{background:linear-gradient(145deg,#192538,#121c2b);border:1px solid var(--line);border-radius:17px;padding:13px;margin-bottom:10px;box-shadow:0 8px 22px #0002}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stat-label,.label{font-size:11px;color:var(--muted)}.stat-value{font-size:23px;font-weight:850;margin-top:3px;font-variant-numeric:tabular-nums}.positive{color:#65d6a3}.negative{color:#ff858c}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;font-size:13px;font-weight:750}
+button{border:0;font:inherit;font-weight:800;cursor:pointer;touch-action:manipulation}
+.small-btn{background:#26364d;color:#dce6f4;padding:7px 11px;border-radius:9px;font-size:11px}
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0 10px}.preset{background:#202d40;border:1px solid #34445b;border-radius:10px;padding:9px 7px;color:#dce6f4;text-align:left;font-size:11px;line-height:1.5}.preset b{display:block;font-size:12px;color:#fff}.preset span{display:block;color:#b8c6d8;font-size:10px}.preset.active{border-color:var(--gold);background:#3a3328;box-shadow:inset 0 0 0 1px #e4bd72}.preset:disabled{opacity:.35}.stage-count{display:flex;gap:6px;margin:8px 0}.stage-count button{flex:1;background:#202d40;border:1px solid #34445b;border-radius:9px;padding:8px;color:#c9d5e4;font-size:11px}.stage-count button.active{background:#3a3328;border-color:var(--gold);color:#fff}.steps{display:grid;grid-template-columns:repeat(var(--stage-count,4),minmax(0,1fr));gap:6px}.step{background:#202d40;border:1px solid transparent;border-radius:11px;text-align:center;padding:9px 2px;color:#b9c5d5}.step b{display:block;font-size:13px}.step span{font-size:11px}.step.active{background:#244d78;border-color:#5d91c6;color:white}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.edit-grid label{font-size:10px;color:var(--muted)}input{width:100%;margin-top:4px;background:#0e1725;border:1px solid #34445b;color:#fff;border-radius:8px;padding:9px;font-size:14px}
+.current{margin-top:10px;text-align:center;background:#0e1827;border-radius:12px;padding:10px}.current .amount{font-size:26px;color:var(--gold);font-weight:900;font-variant-numeric:tabular-nums}.current .label{font-size:10px}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:9px}.side{padding:10px;border-radius:10px;text-align:center;font-size:13px;letter-spacing:1px}.player{background:#1e4e83}.banker{background:#813b45}
+.result{min-height:86px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;background:#0d1725;border:1px solid #29384d;border-radius:13px;margin-bottom:9px}.result-main{min-width:0}.result .hint{font-size:10px;color:var(--muted);letter-spacing:1px}.result .name{font-size:27px;font-weight:900;margin-top:3px}.result .name.p{color:#68aaff}.result .name.b{color:#ff858c}.result-stats{display:flex;align-items:center;gap:12px;text-align:right}.result-stats div{min-width:0}.result-stats span{display:block;font-size:9px;color:var(--muted);white-space:nowrap}.result-stats strong{display:block;font-size:14px;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}.result-stats #profit{color:#65d6a3}.result-stats #profit.negative{color:#ff858c}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.main-btn{padding:16px 8px;border-radius:12px;font-size:18px;background:linear-gradient(135deg,#d4ad62,#a9823e);color:#151b25;box-shadow:0 5px 14px #0004}.stop-btn{padding:16px 8px;border-radius:12px;font-size:17px;background:#9f3f49;color:white}.main-btn:disabled,.stop-btn:disabled,.check-btn:disabled{opacity:.35;cursor:not-allowed}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.check-btn{padding:12px;border-radius:11px;font-size:14px;color:white}.win{background:#18744f}.loss{background:#923b45}
+.message{text-align:center;color:#aab8c9;font-size:11px;min-height:17px;margin:8px 0 2px}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;text-align:center}.mini{background:#0e1827;border-radius:10px;padding:9px 3px}.mini strong{display:block;font-size:19px}.mini span{font-size:10px;color:var(--muted)}
+.bottom{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:9px}.reset{width:100%;margin-top:10px;padding:10px;background:#263448;border:1px solid #394a61;color:#dce6f4;border-radius:10px;font-size:12px}
+.note{font-size:9px;color:#8291a6;line-height:1.45;margin:10px 2px 0}
+.record-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.record-item{background:#0e1827;border:1px solid #29384d;border-radius:10px;padding:10px}.record-item span{display:block;color:var(--muted);font-size:10px}.record-item strong{display:block;font-size:18px;margin-top:4px;font-variant-numeric:tabular-nums}.record-actions{display:flex;gap:8px;margin-top:10px}.record-actions button{flex:1;padding:10px;border-radius:9px;background:#26364d;color:#dce6f4;font-size:11px}.record-panel{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.hidden{display:none!important}
+@media(max-height:760px){.app{padding-top:8px}.panel{padding:10px;margin-bottom:7px}.result{min-height:70px}.main-btn,.stop-btn{padding:13px 6px}.current .amount{font-size:23px}}@media(max-width:360px){.result{padding:8px}.result-stats{gap:7px}.result-stats strong{font-size:12px}.result .name{font-size:24px}}
+
+/* Compact live-play layout: video + essential betting controls fit together */
+.app{width:min(100%,640px);padding:2px 10px 12px}
+.video-panel{border:0;border-radius:12px;margin:0 0 7px;box-shadow:none}
+.video-head{display:none}
+.video-frame{aspect-ratio:16/9}
+header{display:none}
+.app>.panel:first-of-type{padding:10px;margin-bottom:8px}
+.app>.panel:first-of-type .section-head:first-child{margin:0 0 7px}
+.app>.panel:first-of-type .section-head:first-child>span{font-size:11px}
+.app>.panel:first-of-type .small-btn{padding:5px 8px;font-size:10px}
+.app>.panel:first-of-type>.label,
+.app>.panel:first-of-type>.stage-count,
+.app>.panel:first-of-type>.section-head:not(:first-child),
+.app>.panel:first-of-type>.preset-grid{display:none!important}
+.steps{gap:7px}
+.step{padding:11px 2px;border-radius:12px}
+.step b{font-size:14px}
+.step span{font-size:12px}
+.current{margin-top:9px;padding:10px}
+.current .amount{font-size:27px}
+.app>.panel:nth-of-type(2){padding:12px;margin-bottom:8px}
+.sides{gap:8px;margin-bottom:8px}
+.side{padding:12px 8px;font-size:14px}
+.result{min-height:76px;margin-bottom:8px;padding:8px 11px}
+.result .name{font-size:25px}
+.controls{gap:8px}
+.main-btn,.stop-btn{padding:14px 7px;font-size:17px}
+.checks{gap:8px;margin-top:7px}
+.check-btn{padding:10px 6px;font-size:13px}
+.message{margin:6px 0 0;min-height:15px;font-size:10px}
+.app>.panel:nth-of-type(3){padding:10px;margin-bottom:8px}
+.app>.panel:nth-of-type(3) .section-head{margin-bottom:7px}
+.app>.panel:nth-of-type(3) .mini{padding:7px 3px}
+.app>.panel:nth-of-type(3) .mini strong{font-size:18px}
+.note{display:none}
+@media(max-width:390px){
+  .app{padding-left:8px;padding-right:8px}
+  .steps{gap:5px}
+  .step{padding:9px 1px}
+  .step b{font-size:12px}
+  .step span{font-size:10px}
+  .result-stats{gap:8px}
+  .result-stats strong{font-size:12px}
+}
+@media(max-height:900px){
+  .video-panel{margin-bottom:5px}
+  .app>.panel:first-of-type,.app>.panel:nth-of-type(2){padding:9px}
+  .step{padding-top:8px;padding-bottom:8px}
+  .current{padding:7px}
+  .current .amount{font-size:23px}
+  .main-btn,.stop-btn{padding:11px 6px}
+  .check-btn{padding:8px 5px}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<section class="video-panel" aria-label="바카라 라이브 영상">
+  <div class="video-head"><span>LIVE TABLE</span><a href="https://www.youtube.com/live/d7178Eemfrw?si=sI03corTPbqE24SL" target="_blank" rel="noopener">유튜브에서 열기 ↗</a></div>
+  <div class="video-frame">
+    <iframe
+      src="https://www.youtube.com/embed/d7178Eemfrw?playsinline=1&rel=0"
+      title="바카라 라이브 영상"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
+</section>
+<header><div><h1>BACCARAT MARTIN</h1><div class="sub">FLEXIBLE MARTIN · SESSION MANAGER</div></div><div class="pill">OFFLINE READY</div></header>
+
+<div class="panel">
+  <div class="section-head"><span>마틴 베팅 단계</span><button class="small-btn" id="editToggle">⚙ 직접 금액 수정</button></div>
+  <div class="label">단계 수 선택</div>
+  <div class="stage-count" id="stageCount"><button type="button" data-count="2">2</button><button type="button" data-count="3">3</button><button type="button" data-count="4" class="active">4</button><button type="button" data-count="5">5</button><button type="button" data-count="6">6</button><button type="button" data-count="7">7</button><button type="button" data-count="8">8</button></div>
+  <div class="section-head" style="margin-top:9px"><span>내 금액표</span><button class="small-btn" id="saveProfile">＋ 현재 설정 저장</button></div>
+  <div class="preset-grid" id="savedGrid"></div>
+  <div class="steps" id="steps"></div>
+  <div class="edit-grid hidden" id="editGrid"></div>
+  <div class="current"><div class="label" id="currentLabel">현재 베팅금액 · 1단계</div><div class="amount" id="currentAmount">10,000원</div></div>
+</div>
+
+<div class="panel">
+  <div class="sides"><div class="side player">PLAYER</div><div class="side banker">BANKER</div></div>
+  <div class="result">
+    <div class="result-main"><div class="hint" id="resultHint">추첨 결과</div><div class="name" id="resultName">READY</div></div>
+    <div class="result-stats">
+      <div><span>누적손익</span><strong id="profit" class="positive">+0원</strong></div>
+      <div><span>START</span><strong id="starts">0회</strong></div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="main-btn" id="start">▶ START</button>
+    <button class="stop-btn" id="stop" disabled>■ STOP</button>
+  </div>
+  <div class="checks">
+    <button class="check-btn win" id="win" disabled>✓ 승리 체크</button>
+    <button class="check-btn loss" id="loss" disabled>✕ 패배 체크</button>
+  </div>
+  <div class="message" id="message">START를 눌러 추첨하세요.</div>
+</div>
+
+<div class="panel">
+  <div class="section-head"><span>이번 게임 기록</span><span class="label" id="cycle">완료 사이클 0회</span></div>
+  <div class="mini-stats">
+    <div class="mini"><strong class="positive" id="wins">0</strong><span>승리</span></div>
+    <div class="mini"><strong class="negative" id="losses">0</strong><span>패배</span></div>
+    <div class="mini"><strong id="rate">0.0%</strong><span>승률</span></div>
+  </div>
+  <div class="bottom"><span id="totalBet">누적 베팅 0원</span><span id="rounds">체크 0회</span></div>
+  <div class="bottom"><span id="sessionPlayer">PLAYER 0회</span><span id="sessionBanker">BANKER 0회</span></div>
+  <button class="reset" id="openRecords">⚙ 설정 · 영구 누적 기록 보기</button>
+  <button class="reset" id="reset">↻ 이번 게임 초기화</button>
+  <div class="record-panel hidden" id="recordsPanel">
+    <div class="section-head"><span>전체 누적 기록 (초기화 후에도 보존)</span><span class="label">이 기기 저장</span></div>
+    <div class="record-grid" id="lifetimeGrid"></div>
+    <div class="record-actions"><button id="closeRecords">닫기</button><button id="clearLifetime">영구 기록 삭제</button></div>
+  </div>
+</div>
+<div class="note">모의 추첨·기록용 도구입니다. 2~8단계를 선택하고 원하는 금액을 직접 설정할 수 있습니다. 필요한 금액표는 저장해 재사용할 수 있습니다. START를 누를 때마다 15회 추첨하고 마지막 결과만 표시합니다. STOP 후 승리/패배를 확정한 결과만 PLAYER/BANKER 누적 횟수에 반영합니다. STOP으로 결과를 확정한 뒤 승리 또는 패배를 체크하세요. 손익은 플레이어 승리 1배, 뱅커 승리 0.95배(커미션 5% 가정), 패배 시 베팅금 전액 손실로 계산합니다. 실제 바카라 결과나 승률을 예측하지 않습니다.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const defaults=[10000,30000,70000,150000];
+let state={chips:defaults.slice(),presetId:'',profileId:'',step:0,wins:0,losses:0,profit:0,totalBet:0,cycles:0,starts:0,player:0,banker:0,result:null,locked:false,editing:false};
+const RECORD_KEY='bm_lifetime_records_v1';
+const emptyLifetime=()=>({player:0,banker:0,rounds:0,wins:0,losses:0,grossWin:0,grossLoss:0,net:0,totalBet:0});
+let lifetime=emptyLifetime();
+try{const saved=JSON.parse(localStorage.getItem(RECORD_KEY)||'null');if(saved)lifetime={...emptyLifetime(),...saved}}catch(e){}
+function saveLifetime(){try{localStorage.setItem(RECORD_KEY,JSON.stringify(lifetime))}catch(e){}}
+function renderLifetime(){
+ const items=[['PLAYER 출현',lifetime.player.toLocaleString('ko-KR')+'회'],['BANKER 출현',lifetime.banker.toLocaleString('ko-KR')+'회'],['확정 총 판수',lifetime.rounds.toLocaleString('ko-KR')+'회'],['승리 / 패배',lifetime.wins.toLocaleString('ko-KR')+' / '+lifetime.losses.toLocaleString('ko-KR')],['총 수익',won(lifetime.grossWin)],['총 손실',won(lifetime.grossLoss)],['최종 순손익',(lifetime.net>=0?'+':'−')+won(Math.abs(lifetime.net))],['누적 베팅액',won(lifetime.totalBet)]];
+ $('lifetimeGrid').innerHTML=items.map(([label,value],i)=>`<div class="record-item"><span>${label}</span><strong class="${i===6?(lifetime.net>=0?'positive':'negative'):''}">${value}</strong></div>`).join('');
+}
+let savedProfiles=[];
+try{
+ savedProfiles=JSON.parse(localStorage.getItem('bm_profiles')||'[]');
+ if(!Array.isArray(savedProfiles))savedProfiles=[];
+ savedProfiles=savedProfiles.filter(p=>!(Array.isArray(p.chips)&&(p.chips.length===3||p.chips.length===4)));
+ localStorage.setItem('bm_profiles',JSON.stringify(savedProfiles));
+}catch(e){savedProfiles=[]}
+function won(n){return n.toLocaleString('ko-KR')+'원'}
+function signed(n){return (n>=0?'+':'−')+Math.abs(n).toLocaleString('ko-KR')+'원'}
+function save(){try{localStorage.setItem('bm_state',JSON.stringify({...state,editing:false}))}catch(e){}}
+function load(){try{const s=JSON.parse(localStorage.getItem('bm_state'));if(s&&Array.isArray(s.chips)&&s.chips.length>=2&&s.chips.length<=8)state={...state,...s,editing:false}}catch(e){}}
+function totalChips(){return state.chips.reduce((a,b)=>a+b,0)}
+function selectCount(n){if(state.result||state.locked||state.editing)return;const old=state.chips.slice();if(n===old.length)return;let next=old.slice(0,n);while(next.length<n)next.push((next[next.length-1]||10000)*2);state.chips=next;state.step=0;state.presetId='';state.profileId='';state.message=`${n}단계 선택 · 금액을 확인하고 필요하면 수정하세요`;render()}
+function render(){
+ $('profit').textContent=signed(state.profit);$('profit').className='stat-value '+(state.profit>=0?'positive':'negative');
+ $('starts').textContent=state.starts+'회';$('wins').textContent=state.wins;$('losses').textContent=state.losses;$('sessionPlayer').textContent='PLAYER '+state.player+'회';$('sessionBanker').textContent='BANKER '+state.banker+'회';
+ const total=state.wins+state.losses;$('rate').textContent=(total?state.wins/total*100:0).toFixed(1)+'%';
+ $('totalBet').textContent='누적 베팅 '+won(state.totalBet);$('rounds').textContent='체크 '+total+'회';$('cycle').textContent='완료 사이클 '+state.cycles+'회';
+ $('stageCount').querySelectorAll('button').forEach(b=>{b.classList.toggle('active',Number(b.dataset.count)===state.chips.length);b.disabled=!!state.result||state.locked||state.editing});
+ $('savedGrid').innerHTML=savedProfiles.length?savedProfiles.map((p,i)=>`<button type="button" class="preset ${state.profileId===p.id?'active':''}" data-profile="${p.id}" ${state.result||state.locked||state.editing?'disabled':''}><b>${p.name} · ${p.chips.length}단계</b><span>${p.chips.map(v=>(v/10000)+'만').join(' → ')} · 합계 ${(p.chips.reduce((a,b)=>a+b,0)/10000).toLocaleString('ko-KR')}만</span></button>`).join(''):'<div class="label" style="grid-column:1/-1">아직 저장한 금액표가 없습니다.</div>';
+ $('steps').style.setProperty('--stage-count',state.chips.length);
+ $('steps').innerHTML=state.chips.map((v,i)=>`<div class="step ${state.step===i?'active':''}"><b>${i+1}단계</b><span>${(v/10000).toLocaleString('ko-KR')}만</span></div>`).join('');
+ $('currentLabel').textContent=`현재 베팅금액 · ${state.step+1}단계`;$('currentAmount').textContent=won(state.chips[state.step]);
+ $('resultName').textContent=state.result||'READY';$('resultName').className='name '+(state.result==='PLAYER'?'p':state.result==='BANKER'?'b':'');
+ $('resultHint').textContent=state.locked?'STOP · 결과 확정':'추첨 결과';
+ $('start').disabled=state.locked||state.editing||state.chips.length<2||state.chips.length>8||state.chips.some(v=>!Number.isFinite(v)||v<=0);
+ $('stop').disabled=!state.result||state.locked;$('win').disabled=!state.locked;$('loss').disabled=!state.locked;
+ $('editToggle').textContent=state.editing?'✓ 설정 완료':'⚙ 직접 금액 수정';
+ $('editToggle').disabled=!!state.result||state.locked;
+ $('editGrid').classList.toggle('hidden',!state.editing);
+ $('editGrid').innerHTML=state.chips.map((v,i)=>`<label>${i+1}단계 금액 (원)<input type="number" min="1" step="1000" inputmode="numeric" data-step="${i}" value="${v}"></label>`).join('');
+ $('saveProfile').disabled=!!state.result||state.locked||state.editing;
+ $('message').textContent=state.message||'';
+ save();
+}
+function start(){if(state.locked||state.editing)return;let r='';for(let i=0;i<15;i++)r=Math.random()<.5?'PLAYER':'BANKER';state.result=r;state.starts++;state.message='추첨 중 · 계속 START를 누르거나 STOP으로 확정';render()}
+function stop(){if(!state.result||state.locked)return;state.locked=true;state.message='결과 확정 · 승리 또는 패배를 선택하세요';render()}
+function settle(isWin){
+ if(!state.locked||!state.result)return;
+ const settledResult=state.result;
+ const bet=state.chips[state.step],delta=isWin?(settledResult==='PLAYER'?bet:Math.floor(bet*.95)):-bet;
+ state.profit+=delta;state.totalBet+=bet;
+ if(settledResult==='PLAYER'){state.player++;lifetime.player++}else{state.banker++;lifetime.banker++}
+ lifetime.rounds++;lifetime.totalBet+=bet;lifetime.net+=delta;
+ if(isWin){lifetime.wins++;lifetime.grossWin+=delta}else{lifetime.losses++;lifetime.grossLoss+=bet}
+ saveLifetime();
+ if(isWin){state.wins++;state.step=0;state.cycles++;state.message=`승리 · ${signed(delta)} · 1단계 초기화`}
+ else{state.losses++;if(state.step===state.chips.length-1){const count=state.chips.length;state.step=0;state.cycles++;state.message=`${count}단계 패배 · ${signed(delta)} · 사이클 종료 및 초기화`}else{state.step++;state.message=`패배 · ${signed(delta)} · 다음 단계로 이동`}}
+ state.result=null;state.locked=false;renderLifetime();render();
+}
+$('stageCount').addEventListener('click',e=>{const b=e.target.closest('button[data-count]');if(b)selectCount(Number(b.dataset.count))});
+$('savedGrid').addEventListener('click',e=>{const btn=e.target.closest('button[data-profile]');if(!btn||state.result||state.locked||state.editing)return;const p=savedProfiles.find(x=>x.id===btn.dataset.profile);if(!p)return;state.chips=p.chips.slice();state.presetId='';state.profileId=p.id;state.step=0;state.message=`${p.name} 금액표 적용 · ${p.chips.length}단계`;render()});
+$('saveProfile').addEventListener('click',()=>{if(state.result||state.locked||state.editing)return;const name=prompt('저장할 금액표 이름을 입력하세요.','내 '+state.chips.length+'단계 설정');if(!name||!name.trim())return;const id='p'+Date.now();savedProfiles.push({id,name:name.trim(),chips:state.chips.slice()});try{localStorage.setItem('bm_profiles',JSON.stringify(savedProfiles))}catch(e){}state.profileId=id;state.presetId='';state.message=`${name.trim()} 저장 완료`;render()});
+$('start').addEventListener('click',start);$('stop').addEventListener('click',stop);
+$('win').addEventListener('click',()=>settle(true));$('loss').addEventListener('click',()=>settle(false));
+$('editToggle').addEventListener('click',()=>{if(state.editing){const inputs=[...$('editGrid').querySelectorAll('input')];const vals=inputs.map(x=>Math.floor(Number(x.value)));if(vals.some(v=>!Number.isFinite(v)||v<=0)){alert('각 단계 금액을 1원 이상 입력해 주세요.');return}state.chips=vals;state.presetId='';state.profileId='';state.editing=false}else{state.editing=true}render()});
+$('editGrid').addEventListener('change',e=>{if(e.target.matches('input[data-step]')){const i=Number(e.target.dataset.step);state.chips[i]=Math.floor(Number(e.target.value)||0)}});
+$('reset').addEventListener('click',()=>{if(!confirm('이번 게임 기록과 진행 상태를 초기화할까요? 설정 메뉴의 영구 누적 기록은 보존됩니다.'))return;state={chips:state.chips.slice(),presetId:state.presetId||'',profileId:state.profileId||'',step:0,wins:0,losses:0,profit:0,totalBet:0,cycles:0,starts:0,player:0,banker:0,result:null,locked:false,editing:false,message:'이번 게임을 초기화했습니다. 영구 누적 기록은 보존됩니다.'};render()});
+$('openRecords').addEventListener('click',()=>{$('recordsPanel').classList.remove('hidden');renderLifetime()});
+$('closeRecords').addEventListener('click',()=>$('recordsPanel').classList.add('hidden'));
+$('clearLifetime').addEventListener('click',()=>{if(!confirm('영구 누적 기록을 모두 삭제할까요? 되돌릴 수 없습니다.'))return;lifetime=emptyLifetime();saveLifetime();renderLifetime()});
+load();state.message=state.message||'START를 눌러 추첨하세요.';renderLifetime();render();
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body></html>
